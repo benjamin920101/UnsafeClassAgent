@@ -40,3 +40,7 @@ java -javaagent:target/unsafe-class-agent-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 - 本工具主要用於安全分析與逆向工程。
 - 如果 `sun.misc.Unsafe.defineClass` 是 native 方法（在較新的 JVM 版本中），字節碼注入可能無法工作，但 `ClassFileTransformer` 仍然能捕捉到大部分動態加載的類。
+
+
+
+-noverify -verbose:jni -javaagent:"C:\Users\Library\Downloads\unsafe-class-agent-1.0-SNAPSHOT-jar-with-dependencies.jar=C:\Users\Library\Documents\hachimi"
