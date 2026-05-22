@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v4
@@ -27,4 +29,16 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: unsafe-class-agent
-        path: target/unsafe-class-agent-1.0-SNAPSHOT-jar-with-dependencies.jar
+        path: target/unsafe-class-agent-*-jar-with-dependencies.jar
+
+    - name: Create Pre-release
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: latest
+        name: Latest Pre-release
+        prerelease: true
+        generate_release_notes: true
+        files: target/unsafe-class-agent-*-jar-with-dependencies.jar
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

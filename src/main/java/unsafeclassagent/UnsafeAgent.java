@@ -1,4 +1,4 @@
-package com.example;
+package unsafeclassagent;
 
 import javassist.*;
 import java.lang.instrument.*;
@@ -9,12 +9,13 @@ import java.io.ByteArrayInputStream;
 
 public class UnsafeAgent {
     public static void premain(String agentArgs, Instrumentation inst) {
+        // Use agentArgs as dump directory path if provided, otherwise default to "dumped_classes"
+        final String dumpDirPath = (agentArgs != null && !agentArgs.isEmpty()) ? agentArgs : "dumped_classes";
+        
         System.out.println("[UnsafeAgent] Agent loaded. Monitoring class definitions...");
+        System.out.println("[UnsafeAgent] Export path: " + new File(dumpDirPath).getAbsolutePath());
 
         // Ensure the dump directory exists
-        // Note: Using a relative path 'dumped_classes' for better compatibility, 
-        // but you can change it to your specific path like "C:/Users/Library/Documents/hachimi/"
-        String dumpDirPath = "dumped_classes";
         File dumpDir = new File(dumpDirPath);
         if (!dumpDir.exists()) {
             dumpDir.mkdirs();

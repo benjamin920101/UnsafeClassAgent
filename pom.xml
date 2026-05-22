@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.example</groupId>
+  <groupId>unsafeclassagent</groupId>
   <artifactId>unsafe-class-agent</artifactId>
   <version>1.0-SNAPSHOT</version>
 
@@ -32,7 +32,7 @@
           </descriptorRefs>
           <archive>
             <manifestEntries>
-              <Premain-Class>com.example.UnsafeAgent</Premain-Class>
+              <Premain-Class>unsafeclassagent.UnsafeAgent</Premain-Class>
               <Can-Redefine-Classes>true</Can-Redefine-Classes>
               <Can-Retransform-Classes>true</Can-Retransform-Classes>
             </manifestEntries>
